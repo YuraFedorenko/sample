@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -25,9 +27,9 @@ public class JwtTokenUtil {
     private long expirationTime;
 
     public String generateToken(String username, List<String> roles) {
-        Claims claims = Jwts.claims().subject(username).build();
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("sub", username); // Subject claim
         claims.put("roles", roles);
-
         return Jwts.builder()
                 .claims(claims)
                 .issuedAt(new Date())

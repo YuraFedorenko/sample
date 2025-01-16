@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 user.getPassword(),
                 user.isEnabled(),
                 true, true, true,
-                user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRole())).toList()
+                user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole())).toList()
         );
     }
 }
